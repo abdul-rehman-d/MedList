@@ -15,7 +15,7 @@ function MainStack() {
 
   return (
     <Stack.Navigator>
-      {!isSignedIn ? (
+      {isSignedIn ? (
         <>
           <Stack.Screen
             name="Home"
