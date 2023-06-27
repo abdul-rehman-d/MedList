@@ -1,18 +1,42 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { PersistGate } from 'redux-persist/integration/react';
+
+import { store, persistor } from './src/redux/store';
+import MainStack from './src/stacks/MainStack';
+
+const Loading = (
+  <View
+    style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+    <ActivityIndicator size="large" color="#0000ff" />
+  </View>
+);
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <ReduxProvider store={store}>
+      <PersistGate persistor={persistor} loading={Loading}>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <MainStack />
+          </NavigationContainer>
+        </PaperProvider>
+      </PersistGate>
+    </ReduxProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
