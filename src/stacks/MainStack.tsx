@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 
 import Home from "../screens/Home";
 import Export from "../screens/Export";
+import EditProfile from "../screens/EditProfile";
 import Register from "../screens/Register";
 import { RootStackParamList } from "../types";
 
@@ -25,6 +26,11 @@ function MainStack() {
           <Stack.Screen
             name="Export"
             component={Export}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfile}
             options={{ headerShown: false }}
           />
         </>

@@ -16,6 +16,8 @@ function Header ({
   const [ moreMenuVisible, setMoreMenuVisible ] = useState<boolean>(false);
   const name = useSelector((state: RootState) => state.user.user.name);
 
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     <>
       <Appbar.Header style={{
@@ -26,16 +28,15 @@ function Header ({
           mode="contained-tonal"
           onPress={onExport}
         >Export</Button>
-        {/* <Menu
+        <Menu
           visible={moreMenuVisible}
           onDismiss={() => setMoreMenuVisible(false)}
           anchor={<Appbar.Action
             icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
             onPress={() => setMoreMenuVisible(true)}
           />}>
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-        </Menu> */}
+          <Menu.Item onPress={() => navigation.navigate('EditProfile')} title="Edit Profile" />
+        </Menu>
       </Appbar.Header>
       <Divider />
     </>
