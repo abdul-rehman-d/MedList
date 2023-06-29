@@ -1,10 +1,12 @@
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { Appbar, DefaultTheme, Divider, Text } from 'react-native-paper';
+import { Appbar, DefaultTheme, Divider, FAB, Text } from 'react-native-paper';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { captureRef } from 'react-native-view-shot';
+import * as Sharing from 'expo-sharing';
 
 function Header ({onBack}: {onBack: () => void}) {
   return (
@@ -26,6 +28,22 @@ function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList
   const { list } = route.params;
 
   const user = useSelector((state: RootState) => state.user.user);
+
+  function onShare() {
+    captureRef(imageRef, {
+      format: 'png',
+      quality: 1,
+      result: 'tmpfile',
+    }).then(async (uri) => {
+      if (!(await Sharing.isAvailableAsync())) {
+        alert(`Uh oh, sharing isn't available on your platform`);
+        return;
+      }
+
+      await Sharing.shareAsync(uri);
+      navigation.goBack();
+    })
+  }
 
   return (
     <View style={{
@@ -60,6 +78,17 @@ function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList
           </View>
         </View>
       </ScrollView>
+      <FAB
+        icon='share'
+        style={{
+          position: 'absolute',
+          margin: 16,
+          right: 0,
+          bottom: 0,
+        }}
+        label='Share'
+        onPress={onShare}
+      />
     </View>
   )
 }
