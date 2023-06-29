@@ -1,9 +1,44 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Checkbox, DataTable, FAB, Modal, Portal } from 'react-native-paper';
+import { Appbar, Button, Checkbox, DataTable, Divider, FAB, Menu, Modal, Portal } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootState } from '../redux/store';
 import AddNewMedicine from '../components/AddNewMedicine';
+import { Platform, ScrollView, View } from 'react-native';
+
+function Header ({
+  onExport
+}: {
+  onExport: () => void;
+}) {
+  const [ moreMenuVisible, setMoreMenuVisible ] = useState<boolean>(false);
+  const name = useSelector((state: RootState) => state.user.user.name);
+
+  return (
+    <>
+      <Appbar.Header style={{
+        backgroundColor: 'transparent'
+      }}>
+        <Appbar.Content title={`Welcome, ${name}`} />
+        <Button
+          mode="contained-tonal"
+          onPress={onExport}
+        >Export</Button>
+        <Menu
+          visible={moreMenuVisible}
+          onDismiss={() => setMoreMenuVisible(false)}
+          anchor={<Appbar.Action
+            icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
+            onPress={() => setMoreMenuVisible(true)}
+          />}>
+          <Menu.Item onPress={() => {}} title="Item 1" />
+          <Menu.Item onPress={() => {}} title="Item 2" />
+        </Menu>
+      </Appbar.Header>
+      <Divider />
+    </>
+  )
+}
 
 function Medicine({
   id,
@@ -52,28 +87,36 @@ function Home() {
     }
   }
 
+  function onExport() {
+
+  }
+
   return (
-    <SafeAreaView style={{
+    <View style={{
       flex: 1,
-      padding: 16,
     }}>
-      <DataTable>
-        <DataTable.Header>
-          <DataTable.Title style={{
-            flex: .5,
-          }}>{''}</DataTable.Title>
-          <DataTable.Title>Name</DataTable.Title>
-          <DataTable.Title numeric>Quantity</DataTable.Title>
-        </DataTable.Header>
-        {medList.map((medicine, medicineIdx) => (
-          <Medicine
-            key={medicine.id}
-            {...medicine}
-            checked={checkedMedicines.includes(medicine.id)}
-            onCheck={onCheck}
-          />
-        ))}
-      </DataTable>
+      <Header onExport={onExport} />
+      <ScrollView style={{
+        padding: 16,
+      }}>
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title style={{
+              flex: .5,
+            }}>{''}</DataTable.Title>
+            <DataTable.Title>Name</DataTable.Title>
+            <DataTable.Title numeric>Quantity</DataTable.Title>
+          </DataTable.Header>
+          {medList.map((medicine, medicineIdx) => (
+            <Medicine
+              key={medicine.id}
+              {...medicine}
+              checked={checkedMedicines.includes(medicine.id)}
+              onCheck={onCheck}
+            />
+          ))}
+        </DataTable>
+      </ScrollView>
       <Portal>
         <Modal
           visible={showModal}
@@ -95,7 +138,7 @@ function Home() {
         }}
         onPress={() => setShowModal(true)}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
