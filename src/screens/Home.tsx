@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Appbar, Button, Checkbox, DataTable, Divider, FAB, Menu, Modal, Portal } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { Appbar, Button, Checkbox, DataTable, Dialog, Divider, FAB, Menu, Modal, Portal, Text } from 'react-native-paper';
 import { RootState } from '../redux/store';
 import AddNewMedicine from '../components/AddNewMedicine';
 import { Platform, ScrollView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
+import { logout } from '../redux/slices/user';
+import { clearAll } from '../redux/slices/medicineList';
 
 function Header ({
   onExport
@@ -14,9 +16,22 @@ function Header ({
   onExport: () => void;
 }) {
   const [ moreMenuVisible, setMoreMenuVisible ] = useState<boolean>(false);
+  const [ logoutDialogVisible, setLogoutDialogVisible ] = useState<boolean>(false);
   const name = useSelector((state: RootState) => state.user.user.name);
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const dispatch = useDispatch();
+
+  function onLogoutDialog() {
+    setMoreMenuVisible(false);
+    setLogoutDialogVisible(true);
+  }
+
+  function onLogout() {
+    setLogoutDialogVisible(false);
+    dispatch(logout());
+    dispatch(clearAll());
+  }
 
   return (
     <>
@@ -36,9 +51,29 @@ function Header ({
             onPress={() => setMoreMenuVisible(true)}
           />}>
           <Menu.Item onPress={() => navigation.navigate('EditProfile')} title="Edit Profile" />
+          <Menu.Item onPress={onLogoutDialog} title="Logout" />
         </Menu>
       </Appbar.Header>
       <Divider />
+      <Portal>
+        <Dialog visible={logoutDialogVisible} onDismiss={() => setLogoutDialogVisible(false)}>
+          <Dialog.Title>Logout</Dialog.Title>
+          <Dialog.Content>
+              <Text variant="bodyMedium">Are you sure you want to log out?</Text>
+            </Dialog.Content>
+            <Dialog.Actions>
+              <Button
+                style={{ minWidth: 50 }}
+                onPress={onLogout}
+              >Yes</Button>
+              <Button
+                style={{ minWidth: 50 }}
+                mode='contained'
+                onPress={() => setLogoutDialogVisible(false)}
+              >No</Button>
+            </Dialog.Actions>
+        </Dialog>
+      </Portal>
     </>
   )
 }

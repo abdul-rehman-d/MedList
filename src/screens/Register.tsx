@@ -90,7 +90,10 @@ function Register() {
         value={formData.contactNumber}
         onChangeText={text => handleOnChange('contactNumber', text)}
       />
-      <Button mode="contained" onPress={handleLogin}>
+      <Button mode="contained" onPress={handleLogin} style={{
+        marginTop: 8,
+        alignSelf: 'center',
+      }}>
         Register
       </Button>
     </View>
