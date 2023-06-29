@@ -5,7 +5,6 @@ import { RootState } from "../redux/store";
 
 import Home from "../screens/Home";
 import Export from "../screens/Export";
-import AddNewMedicine from "../screens/AddNewMedicine";
 import Register from "../screens/Register";
 
 const Stack = createNativeStackNavigator();
@@ -25,11 +24,6 @@ function MainStack() {
           <Stack.Screen
             name="Export"
             component={Export}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="AddNewMedicine"
-            component={AddNewMedicine}
             options={{ headerShown: false }}
           />
         </>

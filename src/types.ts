@@ -13,6 +13,5 @@ export type Medicine = {
 export type RootStackParamList = {
   Home: undefined;
   Register: undefined;
-  AddNewMedicine: undefined;
   Export: undefined;
 };
