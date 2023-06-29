@@ -23,7 +23,7 @@ function Header ({
           mode="contained-tonal"
           onPress={onExport}
         >Export</Button>
-        <Menu
+        {/* <Menu
           visible={moreMenuVisible}
           onDismiss={() => setMoreMenuVisible(false)}
           anchor={<Appbar.Action
@@ -32,7 +32,7 @@ function Header ({
           />}>
           <Menu.Item onPress={() => {}} title="Item 1" />
           <Menu.Item onPress={() => {}} title="Item 2" />
-        </Menu>
+        </Menu> */}
       </Appbar.Header>
       <Divider />
     </>
@@ -53,7 +53,7 @@ function Medicine({
   onCheck: (id: string) => void;
 }) {
   return (
-    <DataTable.Row>
+    <DataTable.Row onPress={() => onCheck(id)}>
       <DataTable.Cell style={{
         flex: .5,
       }}>
