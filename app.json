@@ -7,6 +7,14 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#E8DEF8"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c42f5e03-3ba6-4909-a18a-2c7b0ccf9a7b"
+      }
+    },
+    "android": {
+      "package": "com.abdulrehmand.MedList"
     }
   }
 }
