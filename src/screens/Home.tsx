@@ -4,6 +4,9 @@ import { Appbar, Button, Checkbox, DataTable, Divider, FAB, Menu, Modal, Portal 
 import { RootState } from '../redux/store';
 import AddNewMedicine from '../components/AddNewMedicine';
 import { Platform, ScrollView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
 
 function Header ({
   onExport
@@ -73,6 +76,7 @@ function Home() {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const medList = useSelector((state: RootState) => state.medicineList.list);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     setCheckedMedicines(medList.map(med => med.id))
@@ -87,7 +91,9 @@ function Home() {
   }
 
   function onExport() {
-
+    navigation.navigate('Export', {
+      list: medList.filter(med => checkedMedicines.includes(med.id))
+    });
   }
 
   return (

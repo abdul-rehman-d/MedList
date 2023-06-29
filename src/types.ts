@@ -13,5 +13,7 @@ export type Medicine = {
 export type RootStackParamList = {
   Home: undefined;
   Register: undefined;
-  Export: undefined;
+  Export: {
+    list: Medicine[];
+  };
 };

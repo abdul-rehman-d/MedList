@@ -6,8 +6,9 @@ import { RootState } from "../redux/store";
 import Home from "../screens/Home";
 import Export from "../screens/Export";
 import Register from "../screens/Register";
+import { RootStackParamList } from "../types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function MainStack() {
   const isSignedIn = useSelector((state: RootState) => Boolean(state.user.user));

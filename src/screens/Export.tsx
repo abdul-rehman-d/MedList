@@ -1,10 +1,39 @@
-import { Text, View } from 'react-native'
-import globalStyles from '../globalStyles';
+import { View } from 'react-native'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
+import { Appbar, Divider, Text } from 'react-native-paper';
 
-function Export() {
+function Header ({onBack}: {onBack: () => void}) {
   return (
-    <View style={globalStyles.fullScreenContainer}>
-      <Text>Export</Text>
+  <>
+    <Appbar.Header style={{
+      backgroundColor: 'transparent'
+    }}>
+      <Appbar.BackAction onPress={onBack} />
+    </Appbar.Header>
+    <Divider />
+  </>
+
+  )
+}
+
+function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList, 'Export'>) {
+  const { list } = route.params;
+  return (
+    <View style={{
+      flex: 1,
+    }}>
+      <Header onBack={() => navigation.goBack()} />
+      <View style={{
+        flex: 1,
+        padding: 16,
+      }}>
+        {
+          list.map((item, index) => (
+            <Text key={index}>{item.name}</Text>
+          ))
+        }
+      </View>
     </View>
   )
 }
