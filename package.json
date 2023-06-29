@@ -3,6 +3,7 @@
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/native-stack": "^6.9.13",
     "@reduxjs/toolkit": "^1.9.5",
+    "cuuid": "^0.3.0",
     "expo": "^48.0.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
