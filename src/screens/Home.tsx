@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Appbar, Button, Checkbox, DataTable, Divider, FAB, Menu, Modal, Portal } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootState } from '../redux/store';
 import AddNewMedicine from '../components/AddNewMedicine';
 import { Platform, ScrollView, View } from 'react-native';
