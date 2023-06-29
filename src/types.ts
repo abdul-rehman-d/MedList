@@ -9,3 +9,10 @@ export type Medicine = {
   name: string;
   quantity: number;
 }
+
+export type RootStackParamList = {
+  Home: undefined;
+  Register: undefined;
+  AddNewMedicine: undefined;
+  Export: undefined;
+};
