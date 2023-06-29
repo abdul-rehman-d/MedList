@@ -3,13 +3,15 @@ import { Medicine } from "../../types";
 
 const medicineListSlice = createSlice({
   name: 'medicineList',
-  initialState: [] as Medicine[],
+  initialState: {
+    list: [] as Medicine[]
+  },
   reducers: {
     addNew: (state, action) => {
-      state.push(action.payload);
+      state.list.push(action.payload);
     },
     remove: (state, action) => {
-      state = state.filter((item) => item.id !== action.payload);
+      state.list = state.list.filter((item) => item.id !== action.payload);
     },
   }
 });

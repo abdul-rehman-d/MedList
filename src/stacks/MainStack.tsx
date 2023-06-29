@@ -11,7 +11,7 @@ import Register from "../screens/Register";
 const Stack = createNativeStackNavigator();
 
 function MainStack() {
-  const isSignedIn = useSelector((state: RootState) => Boolean(state.user));
+  const isSignedIn = useSelector((state: RootState) => Boolean(state.user.user));
 
   return (
     <Stack.Navigator>

@@ -6,11 +6,11 @@ import userReducer from './slices/user';
 import medicineListReducer from './slices/medicineList';
 
 const persistConfig = {
-  key: 'root',
+  key: 'medlist-app-storage',
   storage: AsyncStorage,
 }
 
-const rootReducer = combineReducers({ 
+const rootReducer = combineReducers({
   user: userReducer,
   medicineList: medicineListReducer,
 })
@@ -20,6 +20,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 })
 
 export const persistor = persistStore(store);
