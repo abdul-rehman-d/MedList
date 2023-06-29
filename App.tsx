@@ -18,14 +18,7 @@ const Loading = (
   </View>
 );
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'tomato',
-    accent: 'yellow',
-  },
-};
+const theme = DefaultTheme;
 
 export default function App() {
   return (
