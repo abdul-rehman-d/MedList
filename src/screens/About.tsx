@@ -1,22 +1,7 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { Appbar, DefaultTheme, Divider } from 'react-native-paper';
-
-function Header ({onBack}: {onBack: () => void}) {
-  return (
-  <>
-    <Appbar.Header style={{
-      backgroundColor: 'transparent'
-    }}>
-      <Appbar.BackAction onPress={onBack} />
-      <Appbar.Content title="About" />
-    </Appbar.Header>
-    <Divider />
-  </>
-
-  )
-}
+import CustomAppBar from '../components/ui/CustomAppBar';
 
 function About({ route, navigation }: NativeStackScreenProps<RootStackParamList, 'About'>) {
 
@@ -24,7 +9,10 @@ function About({ route, navigation }: NativeStackScreenProps<RootStackParamList,
     <View style={{
       flex: 1,
     }}>
-      <Header onBack={() => navigation.goBack()} />
+      <CustomAppBar
+        onBack={() => navigation.goBack()}
+        title="About"
+      />
       <ScrollView style={{
         flex: 1,
         padding: 16,

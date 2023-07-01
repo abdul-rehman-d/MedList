@@ -1,22 +1,7 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { Appbar, DefaultTheme, Divider } from 'react-native-paper';
-
-function Header ({onBack}: {onBack: () => void}) {
-  return (
-  <>
-    <Appbar.Header style={{
-      backgroundColor: 'transparent'
-    }}>
-      <Appbar.BackAction onPress={onBack} />
-      <Appbar.Content title="Advanced Options" />
-    </Appbar.Header>
-    <Divider />
-  </>
-
-  )
-}
+import CustomAppBar from '../components/ui/CustomAppBar';
 
 function AdvancedOptions({ route, navigation }: NativeStackScreenProps<RootStackParamList, 'AdvancedOptions'>) {
 
@@ -24,7 +9,10 @@ function AdvancedOptions({ route, navigation }: NativeStackScreenProps<RootStack
     <View style={{
       flex: 1,
     }}>
-      <Header onBack={() => navigation.goBack()} />
+      <CustomAppBar
+        onBack={() => navigation.goBack()}
+        title='Advanced Options'
+      />
       <ScrollView style={{
         flex: 1,
         padding: 16,
