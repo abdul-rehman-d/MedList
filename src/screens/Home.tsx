@@ -33,6 +33,11 @@ function Header ({
     dispatch(clearAll());
   }
 
+  function onEditProfile() {
+    setMoreMenuVisible(false);
+    navigation.navigate('EditProfile');
+  }
+
   return (
     <>
       <Appbar.Header style={{
@@ -50,7 +55,7 @@ function Header ({
             icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
             onPress={() => setMoreMenuVisible(true)}
           />}>
-          <Menu.Item onPress={() => navigation.navigate('EditProfile')} title="Edit Profile" />
+          <Menu.Item onPress={onEditProfile} title="Edit Profile" />
           <Menu.Item onPress={onLogoutDialog} title="Logout" />
         </Menu>
       </Appbar.Header>
