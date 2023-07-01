@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/slices/user';
 import { RootStackParamList } from '../types';
 import { RootState } from '../redux/store';
+import CustomAppBar from '../components/ui/CustomAppBar';
 
 function Register() {
   // states
@@ -79,34 +80,36 @@ function Register() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text variant="headlineSmall">Edit Profile</Text>
-      <CustomTextInput
-        error={error.name}
-        label="Full Name"
-        value={formData.name}
-        onChangeText={text => handleOnChange('name', text)}
+    <View style={{ flex: 1 }}>
+      <CustomAppBar
+        onBack={() => navigation.goBack()}
+        title="Edit Profile"
       />
-      <CustomTextInput
-        error={error.contactNumber}
-        label="Contact Number"
-        value={formData.contactNumber}
-        onChangeText={text => handleOnChange('contactNumber', text)}
-      />
-      <Button mode="contained" onPress={handleSaveNew}>
-        Save
-      </Button>
+      <View style={styles.container}>
+        <CustomTextInput
+          error={error.name}
+          label="Full Name"
+          value={formData.name}
+          onChangeText={text => handleOnChange('name', text)}
+        />
+        <CustomTextInput
+          error={error.contactNumber}
+          label="Contact Number"
+          value={formData.contactNumber}
+          onChangeText={text => handleOnChange('contactNumber', text)}
+        />
+        <Button mode="contained" onPress={handleSaveNew}>
+          Save
+        </Button>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
     paddingVertical: 20,
     paddingHorizontal: 40,
-    justifyContent: 'center',
     gap: 12,
   },
 });
