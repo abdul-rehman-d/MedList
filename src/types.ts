@@ -14,6 +14,8 @@ export type RootStackParamList = {
   Home: undefined;
   Register: undefined;
   EditProfile: undefined;
+  AdvancedOptions: undefined;
+  About: undefined;
   Export: {
     list: Medicine[];
   };

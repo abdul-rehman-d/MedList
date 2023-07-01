@@ -38,6 +38,20 @@ function Header ({
     navigation.navigate('EditProfile');
   }
 
+  function onAdvancedOptions() {
+    setMoreMenuVisible(false);
+    navigation.navigate('AdvancedOptions');
+  }
+
+  function onAboutApp() {
+    setMoreMenuVisible(false);
+    navigation.navigate('About');
+  }
+
+  function onEditList() {
+    setMoreMenuVisible(false);
+  }
+
   return (
     <>
       <Appbar.Header style={{
@@ -55,7 +69,10 @@ function Header ({
             icon={Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical'}
             onPress={() => setMoreMenuVisible(true)}
           />}>
+          <Menu.Item onPress={onEditList} title="Edit List" />
           <Menu.Item onPress={onEditProfile} title="Edit Profile" />
+          <Menu.Item onPress={onAdvancedOptions} title="Advanced Options" />
+          <Menu.Item onPress={onAboutApp} title="About App" />
           <Menu.Item onPress={onLogoutDialog} title="Logout" />
         </Menu>
       </Appbar.Header>

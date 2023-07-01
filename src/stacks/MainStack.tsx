@@ -8,6 +8,8 @@ import Export from "../screens/Export";
 import EditProfile from "../screens/EditProfile";
 import Register from "../screens/Register";
 import { RootStackParamList } from "../types";
+import AdvancedOptions from "../screens/AdvancedOptions";
+import About from "../screens/About";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,6 +33,16 @@ function MainStack() {
           <Stack.Screen
             name="EditProfile"
             component={EditProfile}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AdvancedOptions"
+            component={AdvancedOptions}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="About"
+            component={About}
             options={{ headerShown: false }}
           />
         </>
