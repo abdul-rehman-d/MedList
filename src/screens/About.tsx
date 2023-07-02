@@ -42,8 +42,8 @@ function About({ route, navigation }: NativeStackScreenProps<RootStackParamList,
         <View>
           <Text variant='bodyMedium'>
             Check me out at: <Text variant='bodyMedium' style={{ fontWeight: '700' }} onPress={() => {
-              Linking.openURL('https://abdulrehman.dev');
-            }}>https://abdulrehman.dev</Text>
+              Linking.openURL('https://abdulrehmandev.me');
+            }}>https://abdulrehmandev.me</Text>
           </Text>
         </View>
       </View>
