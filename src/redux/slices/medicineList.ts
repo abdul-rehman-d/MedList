@@ -16,6 +16,14 @@ const medicineListSlice = createSlice({
     remove: (state, action) => {
       state.list = state.list.filter((item) => item.id !== action.payload);
     },
+    editExisting: (state, action) => {
+      state.list = state.list.map((item) => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+        return item;
+      });
+    },
     clearAll(state) {
       state.list = [];
     },
