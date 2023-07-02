@@ -14,7 +14,23 @@
       }
     },
     "android": {
-      "package": "com.abdulrehmand.MedList"
-    }
+      "package": "com.abdulrehmand.MedList",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "ios": {
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "This app requires access to your photo library to read CSV files."
+      }
+    },
+    "plugins": [
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ]
+    ] 
   }
 }

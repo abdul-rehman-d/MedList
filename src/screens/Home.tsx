@@ -160,7 +160,7 @@ function Home() {
     }}>
       <Header onExport={onExport} />
       <ScrollView style={{
-        padding: 16,
+        paddingHorizontal: 16,
       }}>
         <DataTable>
           <DataTable.Header>

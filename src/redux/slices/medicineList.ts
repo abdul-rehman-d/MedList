@@ -10,6 +10,9 @@ const medicineListSlice = createSlice({
     addNew: (state, action) => {
       state.list.push(action.payload);
     },
+    addBunch: (state, action) => {
+      state.list = [...state.list, ...action.payload];
+    },
     remove: (state, action) => {
       state.list = state.list.filter((item) => item.id !== action.payload);
     },
@@ -21,6 +24,7 @@ const medicineListSlice = createSlice({
 
 export const {
   addNew,
+  addBunch,
   remove,
   clearAll,
 } = medicineListSlice.actions;
