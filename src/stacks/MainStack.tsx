@@ -6,7 +6,7 @@ import { RootState } from "../redux/store";
 import Home from "../screens/Home";
 import Export from "../screens/Export";
 import EditProfile from "../screens/EditProfile";
-import OnBoardiing from "../screens/OnBoardiing";
+import OnBoarding from "../screens/OnBoarding";
 import { RootStackParamList } from "../types";
 import AdvancedOptions from "../screens/AdvancedOptions";
 import About from "../screens/About";
@@ -49,7 +49,7 @@ function MainStack() {
       ) : (
         <Stack.Screen
           name="OnBoarding"
-          component={OnBoardiing}
+          component={OnBoarding}
           options={{ headerShown: false }}
         />
       )}

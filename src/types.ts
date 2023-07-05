@@ -1,7 +1,6 @@
 export type User = {
-  id: string;
   name: string;
-  contactNumber: string;
+  additionalFields: string[];
 }
 
 export type Medicine = {

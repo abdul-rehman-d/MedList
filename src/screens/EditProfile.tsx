@@ -14,17 +14,17 @@ function EditProfile() {
   // states
   const [formData, setFormData] = useState<{
     name: string;
-    contactNumber: string;
+    // contactNumber: string;
   }>({
     name: '',
-    contactNumber: '',
+    // contactNumber: '',
   });
   const [error, setError] = useState<{
     name: string;
-    contactNumber: string;
+    // contactNumber: string;
   }>({
     name: '',
-    contactNumber: '',
+    // contactNumber: '',
   });
 
   // hooks
@@ -35,7 +35,7 @@ function EditProfile() {
   useEffect(() => {
     setFormData({
       name: user?.name || '',
-      contactNumber: user?.contactNumber || '',
+      // contactNumber: user?.contactNumber || '',
     })
   }, [user])
 
@@ -54,9 +54,9 @@ function EditProfile() {
     if (!formData.name) {
       error['name'] = 'Name is required';
     }
-    if (!formData.contactNumber) {
-      error['contactNumber'] = 'Contact Number is required';
-    }
+    // if (!formData.contactNumber) {
+    //   error['contactNumber'] = 'Contact Number is required';
+    // }
 
     if (Object.keys(error).length > 0) {
       setError(currErrors => ({
@@ -68,14 +68,13 @@ function EditProfile() {
 
     setError({
       name: '',
-      contactNumber: '',
+      // contactNumber: '',
     })
 
-    dispatch(login({
-      id: '1',
-      name: formData.name,
-      contactNumber: formData.contactNumber,
-    }));
+    // dispatch(login({
+    //   name: formData.name,
+    //   contactNumber: formData.contactNumber,
+    // }));
     navigation.goBack();
   }
 
@@ -91,12 +90,6 @@ function EditProfile() {
           label="Full Name"
           value={formData.name}
           onChangeText={text => handleOnChange('name', text)}
-        />
-        <CustomTextInput
-          error={error.contactNumber}
-          label="Contact Number"
-          value={formData.contactNumber}
-          onChangeText={text => handleOnChange('contactNumber', text)}
         />
         <Button mode="contained" onPress={handleSaveNew}>
           Save
