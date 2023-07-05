@@ -12,7 +12,7 @@ export type Medicine = {
 
 export type RootStackParamList = {
   Home: undefined;
-  Register: undefined;
+  OnBoarding: undefined;
   EditProfile: undefined;
   AdvancedOptions: undefined;
   About: undefined;

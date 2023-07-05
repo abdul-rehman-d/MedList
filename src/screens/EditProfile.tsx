@@ -10,7 +10,7 @@ import { RootStackParamList } from '../types';
 import { RootState } from '../redux/store';
 import CustomAppBar from '../components/ui/CustomAppBar';
 
-function Register() {
+function EditProfile() {
   // states
   const [formData, setFormData] = useState<{
     name: string;
@@ -114,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default EditProfile;

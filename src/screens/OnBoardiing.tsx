@@ -9,7 +9,7 @@ import { login } from '../redux/slices/user';
 import { RootStackParamList } from '../types';
 import { RootState } from '../redux/store';
 
-function Register() {
+function OnBoardiing() {
   // states
   const [formData, setFormData] = useState<{
     name: string;
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default OnBoardiing;
