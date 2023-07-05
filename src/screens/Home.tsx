@@ -298,6 +298,7 @@ function Home() {
             />
           ))}
         </DataTable>
+        <View style={{ height: 84 }} />
       </ScrollView>
       <Portal>
         <Modal
