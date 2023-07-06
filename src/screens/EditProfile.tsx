@@ -1,82 +1,56 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native'
-import { Text, Button, TextInput } from 'react-native-paper';
+import { Text, Button, TextInput, List } from 'react-native-paper';
 import CustomTextInput from '../components/ui/CustomTextInput';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../redux/slices/user';
+import { changeName, login } from '../redux/slices/user';
 import { RootStackParamList } from '../types';
 import { RootState } from '../redux/store';
 import CustomAppBar from '../components/ui/CustomAppBar';
 
-function EditProfile() {
+function EditName() {
   // states
-  const [formData, setFormData] = useState<{
-    name: string;
-    // contactNumber: string;
-  }>({
-    name: '',
-    // contactNumber: '',
-  });
-  const [error, setError] = useState<{
-    name: string;
-    // contactNumber: string;
-  }>({
-    name: '',
-    // contactNumber: '',
-  });
+  const [name, setName] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   // hooks
   const dispatch = useDispatch();
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const user = useSelector((state: RootState) => state.user.user);
+  const prevName = useSelector((state: RootState) => state.user.user.name);
 
   useEffect(() => {
-    setFormData({
-      name: user?.name || '',
-      // contactNumber: user?.contactNumber || '',
-    })
-  }, [user])
+    setName(prevName);
+  }, [prevName])
 
   // functions
-  function handleOnChange (key: string, value: string) {
-    setFormData({
-      ...formData,
-      [key]: value,
-    })
-  }
-
   function handleSaveNew() {
-    console.log('formData', formData);
-
-    const error = {};
-    if (!formData.name) {
-      error['name'] = 'Name is required';
-    }
-    // if (!formData.contactNumber) {
-    //   error['contactNumber'] = 'Contact Number is required';
-    // }
-
-    if (Object.keys(error).length > 0) {
-      setError(currErrors => ({
-        ...currErrors,
-        ...error,
-      }))
+    if (!name) {
+      setError('Name is required');
       return;
     }
 
-    setError({
-      name: '',
-      // contactNumber: '',
-    })
-
-    // dispatch(login({
-    //   name: formData.name,
-    //   contactNumber: formData.contactNumber,
-    // }));
-    navigation.goBack();
+    setError('');
+    dispatch(changeName(name));
   }
+
+  return (
+    <View style={{ padding: 20, gap: 10 }}>
+      <CustomTextInput
+        error={error}
+        label="Full Name"
+        value={name}
+        onChangeText={text => setName(text)}
+      />
+      <Button mode="contained" onPress={handleSaveNew} disabled={prevName===name}>
+        {prevName===name ? 'No changes' : 'Save'}
+      </Button>
+    </View>
+  )
+}
+
+function EditProfile() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <View style={{ flex: 1 }}>
@@ -85,15 +59,11 @@ function EditProfile() {
         title="Edit Personal Information"
       />
       <View style={styles.container}>
-        <CustomTextInput
-          error={error.name}
-          label="Full Name"
-          value={formData.name}
-          onChangeText={text => handleOnChange('name', text)}
-        />
-        <Button mode="contained" onPress={handleSaveNew}>
-          Save
-        </Button>
+        <List.Accordion title='Edit Name'>
+          <EditName />
+        </List.Accordion>
+        <List.Accordion title='Edit Other Fields'>
+        </List.Accordion>
       </View>
     </View>
   )
@@ -102,7 +72,6 @@ function EditProfile() {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
-    paddingHorizontal: 40,
     gap: 12,
   },
 });

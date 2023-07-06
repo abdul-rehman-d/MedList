@@ -15,6 +15,12 @@ const userSlice = createSlice({
     ) => {
       state.user = action.payload;
     },
+    changeName: (
+      state: { user: userState },
+      action: PayloadAction<string>
+    ) => {
+      state.user.name = action.payload;
+    },
     logout: (state) => {
       state.user = null;
     },
@@ -23,6 +29,7 @@ const userSlice = createSlice({
 
 export const {
   login,
+  changeName,
   logout,
 } = userSlice.actions;
 
