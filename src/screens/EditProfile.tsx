@@ -82,7 +82,7 @@ function EditProfile() {
     <View style={{ flex: 1 }}>
       <CustomAppBar
         onBack={() => navigation.goBack()}
-        title="Edit Profile"
+        title="Edit Personal Information"
       />
       <View style={styles.container}>
         <CustomTextInput

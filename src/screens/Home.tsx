@@ -103,10 +103,10 @@ function Header ({
                   onPress={() => setMoreMenuVisible(true)}
                 />}>
                 <Menu.Item onPress={onEditList} title="Edit List" />
-                <Menu.Item onPress={onEditProfile} title="Edit Profile" />
+                <Menu.Item onPress={onEditProfile} title="Edit Personal Information" />
                 <Menu.Item onPress={onAdvancedOptions} title="Advanced Options" />
                 <Menu.Item onPress={onAboutApp} title="About App" />
-                <Menu.Item onPress={onLogoutDialog} title="Logout" />
+                <Menu.Item onPress={onLogoutDialog} title="Delete All Information" titleStyle={{ color: DefaultTheme.colors.error }} />
               </Menu>
             </>
           )
@@ -115,9 +115,9 @@ function Header ({
       <Divider />
       <Portal>
         <Dialog visible={logoutDialogVisible} onDismiss={() => setLogoutDialogVisible(false)}>
-          <Dialog.Title>Logout</Dialog.Title>
+          <Dialog.Title>Delete All Informatiom</Dialog.Title>
           <Dialog.Content>
-              <Text variant="bodyMedium">Are you sure you want to log out?</Text>
+              <Text variant="bodyMedium">Are you sure you want to delete all your information? This will delete all your personal information and list of medicines.</Text>
             </Dialog.Content>
             <Dialog.Actions>
               <Button
