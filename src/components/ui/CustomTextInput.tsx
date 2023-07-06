@@ -2,15 +2,16 @@ import React from 'react'
 import { View } from 'react-native'
 import { DefaultTheme, Text, TextInput } from 'react-native-paper'
 
-function CustomTextInput({ error, label, value, mode, onChangeText }: {
+function CustomTextInput({ error, label, value, mode, onChangeText, flexGrow }: {
   error?: string;
   label: string;
   value: string;
   mode?: 'outlined' | 'flat';
+  flexGrow?: boolean;
   onChangeText: (text: string) => void;
 }) {
   return (
-    <View>
+    <View {...(flexGrow ? { style: { flexGrow: 1 } } : {})}>
       <TextInput
         error={Boolean(error)}
         label={label}
@@ -23,4 +24,4 @@ function CustomTextInput({ error, label, value, mode, onChangeText }: {
   )
 }
 
-export default CustomTextInput
+export default CustomTextInput;
