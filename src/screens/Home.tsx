@@ -275,7 +275,7 @@ function Home() {
               !editMode && (
                 <DataTable.Title style={{
                   flex: .5,
-                }}>{''}</DataTable.Title>
+                }}>{'#'}</DataTable.Title>
               )
             }
             <DataTable.Title>Name</DataTable.Title>
