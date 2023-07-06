@@ -22,7 +22,6 @@ function OnBoardiing() {
   function handleAdditionalFieldsSubmit() {
     dispatch({ type: 'user/login', payload: { name, additionalFields }});
     dispatch({ type: 'onBoarding/onSuccess' });
-    navigation.navigate('Home');
   }
 
   switch (currentScreen) {
