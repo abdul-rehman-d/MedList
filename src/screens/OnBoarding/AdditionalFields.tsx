@@ -64,11 +64,16 @@ function AdditionalFields({
         <Text variant='bodyLarge'>
           Additional Fields are any additional information you want to add on the export image.
         </Text>
-        <Text variant='bodyLarge'>
+        <Text variant='bodyLarge' style={{ fontWeight: '700' }}>
           If you do not wish to add any, just click Next!
         </Text>
         <View style={styles.imageContainer}>
-          <Text variant='labelLarge'>Example:</Text>
+          <View style={{ flexShrink: 1 }}>
+            <Text variant='bodyLarge' style={{ fontWeight: '700' }}>Example:</Text>
+            <Text variant='bodyLarge'>
+              You can add your phone number, email, etc.
+            </Text>
+          </View>
           <Image
             source={require('../../../assets/additional-fields-demo.jpg')}
             style={{ height: '100%', width: 'auto', aspectRatio: '1541 / 750', marginLeft: 'auto' }}
