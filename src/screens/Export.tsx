@@ -7,20 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { captureRef } from 'react-native-view-shot';
 import * as Sharing from 'expo-sharing';
-
-function Header ({onBack}: {onBack: () => void}) {
-  return (
-  <>
-    <Appbar.Header style={{
-      backgroundColor: 'transparent'
-    }}>
-      <Appbar.BackAction onPress={onBack} />
-    </Appbar.Header>
-    <Divider />
-  </>
-
-  )
-}
+import CustomAppBar from '../components/ui/CustomAppBar';
 
 function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList, 'Export'>) {
   const imageRef = useRef<View>(null);
@@ -49,7 +36,10 @@ function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList
     <View style={{
       flex: 1,
     }}>
-      <Header onBack={() => navigation.goBack()} />
+      <CustomAppBar
+        title='Export'
+        onBack={() => navigation.goBack()}
+      />
       <ScrollView style={{
         flex: 1,
         padding: 16,
