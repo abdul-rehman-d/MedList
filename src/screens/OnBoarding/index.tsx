@@ -1,26 +1,27 @@
 import { useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/slices/user';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamList } from '../../types';
 import EnterName from './EnterName';
 import AdditionalFields from './AdditionalFields';
+import { RootState } from '../../redux/store';
 
 function OnBoardiing() {
   const [currentScreen, setCurrentScreen] = useState<number>(0);
-  const [name, setName] = useState<string>('');
+
+  const { name, additionalFields } = useSelector((state: RootState) => state.onBoarding);
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const dispatch = useDispatch();
 
-  function handleEnterNameSubmit(name: string) {
+  function handleEnterNameSubmit() {
     setCurrentScreen(currentScreen + 1);
-    setName(name);
   }
 
-  function handleAdditionalFieldsSubmit(additionalFields: string[]) {
-    dispatch(login({ name, additionalFields }));
+  function handleAdditionalFieldsSubmit() {
+    dispatch({ type: 'user/login', payload: { name, additionalFields }});
+    dispatch({ type: 'onBoarding/onSuccess' });
     navigation.navigate('Home');
   }
 

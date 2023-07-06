@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/user';
 import medicineListReducer from './slices/medicineList';
+import onBoardingReducer from './slices/onBoarding';
 
 const persistConfig = {
   key: 'medlist-app-storage',
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   medicineList: medicineListReducer,
+  onBoarding: onBoardingReducer,
 })
 
 

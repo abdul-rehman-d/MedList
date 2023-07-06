@@ -3,21 +3,29 @@ import { StyleSheet, View } from 'react-native'
 import { Button, DefaultTheme, Text } from 'react-native-paper'
 import CustomTextInput from '../../components/ui/CustomTextInput';
 import { Image } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 function EnterName({
   handleSubmit,
 }: {
-  handleSubmit: (name: string) => void;
+  handleSubmit: () => void;
 }) {
-  const [ name, setName ] = useState<string>('')
   const [ error, setError ] = useState<string>('')
+
+  const name = useSelector((state: RootState) => state.onBoarding.name);
+  const dispatch = useDispatch();
+
+  function setName(name: string) {
+    dispatch({ type: 'onBoarding/setName', payload: name });
+  }
 
   function onSubmit() {
     if (!name) {
       setError('Please enter a name')
       return
     }
-    handleSubmit(name)
+    handleSubmit()
   }
 
   return (
