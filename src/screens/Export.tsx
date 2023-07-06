@@ -59,7 +59,13 @@ function Export({ route, navigation }: NativeStackScreenProps<RootStackParamList
             Medicine List
           </Text>
           <Text variant='bodyLarge' style={{ textAlign: 'right' }}>{user.name}</Text>
-          <Text variant='bodyLarge' style={{ textAlign: 'right' }}>{user.contactNumber}</Text>
+          {user.additionalFields.map((field, index) => (
+            <Text
+              variant='bodyLarge'
+              style={{ textAlign: 'right' }}
+              key={`additional-field-${index}`}
+            >{field}</Text>
+          ))}
           <View style={imageStyles.tableContainer}>
             <View style={{ ...imageStyles.row, ...imageStyles.headRow }}>
               <Text style={{ ...imageStyles.col1, ...imageStyles.bold }}>Sr No</Text>
