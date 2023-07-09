@@ -1,45 +1,8 @@
-import { useState } from 'react';
 import { Image, ScrollView, StyleSheet, View } from 'react-native'
 import { Button, DefaultTheme, Text } from 'react-native-paper'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import CustomTextInput from '../../components/ui/CustomTextInput';
-
-function AdditionalFieldInput({
-  onSubmit,
-}: {
-  onSubmit: (value: string) => void;
-}) {
-  const [ value, setValue ] = useState<string>('');
-  const [ error, setError ] = useState<string>('');
-
-  function handleSubmit() {
-    if (!value) {
-      setError('Field is required')
-      return
-    }
-    onSubmit(value)
-    setValue('')
-  }
-
-  return (
-    <View style={{ flexDirection: 'row', marginBottom: 12 }}>
-      <CustomTextInput
-        label='Field'
-        value={value}
-        onChangeText={setValue}
-        error={error}
-        mode='outlined'
-        flexGrow
-      />
-      <Button
-        mode='contained-tonal'
-        onPress={handleSubmit}
-        style={{ marginLeft: 'auto', alignSelf: 'center', marginStart: 12 }}
-      >Add</Button>
-    </View>
-  )
-}
+import AdditionalFieldsCRUD from '../../components/AdditionalFields';
 
 function AdditionalFields({
   handleSubmit,
@@ -51,6 +14,10 @@ function AdditionalFields({
 
   function onAddNewFieldSubmit(value: string) {
     dispatch({ type: 'onBoarding/addAdditionalField', payload: value })
+  }
+
+  function onRemove(index: number) {
+    dispatch({ type: 'onBoarding/removeAdditionalField', payload: index })
   }
 
   function onSubmit() {
@@ -81,17 +48,11 @@ function AdditionalFields({
         </View>
       </View>
       <View style={styles.bottom}>
-        <AdditionalFieldInput
-          onSubmit={onAddNewFieldSubmit}
+        <AdditionalFieldsCRUD
+          onAddNewFieldSubmit={onAddNewFieldSubmit}
+          onRemove={onRemove}
+          additionalFields={additionalFields}
         />
-        <ScrollView>
-          {additionalFields.map((field, index) => (
-            <View key={index} style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 12 }}>
-              <Text variant='bodyLarge'>{field}</Text>
-              <Button mode='text' onPress={() => dispatch({ type: 'onBoarding/removeAdditionalField', payload: index })}>Remove</Button>
-            </View>
-          ))}
-        </ScrollView>
         <Button mode='contained' onPress={onSubmit} style={{ alignSelf: 'center' }}>Next</Button>
         <View>
           <Text variant='bodyLarge' style={{ fontWeight: '700' }}>Note: </Text>

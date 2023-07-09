@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native'
-import { Text, Button, TextInput, List } from 'react-native-paper';
+import { Button, List } from 'react-native-paper';
 import CustomTextInput from '../components/ui/CustomTextInput';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName, login } from '../redux/slices/user';
+import { updateAdditionalField, changeName } from '../redux/slices/user';
 import { RootStackParamList } from '../types';
 import { RootState } from '../redux/store';
 import CustomAppBar from '../components/ui/CustomAppBar';
+import AdditionalFieldsCRUD from '../components/AdditionalFields';
 
 function EditName() {
   // states
@@ -49,6 +50,60 @@ function EditName() {
   )
 }
 
+function EditAdditionalFields() {
+  const [ additionalFields, setAdditionalFields ] = useState<string[]>([]);
+
+  const currentAdditionalFields = useSelector((state: RootState) => state.user.user.additionalFields);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setAdditionalFields(currentAdditionalFields);
+  }, [currentAdditionalFields]);
+
+  const hasChanges = useMemo(() => {
+    if (additionalFields.length !== currentAdditionalFields.length) {
+      return true;
+    }
+
+    let flag = false;
+    for (let i = 0; i < additionalFields.length; i++) {
+      if (additionalFields[i] !== currentAdditionalFields[i]) {
+        flag = true;
+        break;
+      }
+    }
+
+    return flag;
+  }, [additionalFields, currentAdditionalFields])
+
+  function onAddNewFieldSubmit(value: string) {
+    setAdditionalFields(curr => ([...curr, value]));
+  }
+
+  function onRemove(index: number) {
+    setAdditionalFields(curr => {
+      return curr.filter((_, i) => i !== index);
+    });
+  }
+
+  function onSubmit() {
+    dispatch(updateAdditionalField(additionalFields));
+  }
+
+  return (
+    <View style={{ padding: 20, gap: 10 }}>
+      <AdditionalFieldsCRUD
+        additionalFields={additionalFields}
+        onAddNewFieldSubmit={onAddNewFieldSubmit}
+        onRemove={onRemove}
+      />
+      <Button mode="contained" onPress={onSubmit} disabled={!hasChanges}>
+        {!hasChanges ? 'No changes' : 'Save'}
+      </Button>
+    </View>
+  )
+}
+
 function EditProfile() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -63,6 +118,7 @@ function EditProfile() {
           <EditName />
         </List.Accordion>
         <List.Accordion title='Edit Other Fields'>
+          <EditAdditionalFields />
         </List.Accordion>
       </View>
     </View>
